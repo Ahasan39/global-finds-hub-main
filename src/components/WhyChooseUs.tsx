@@ -26,8 +26,8 @@ const features = [
 const WhyChooseUs = () => {
   return (
     <section className="bg-secondary/50">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
-        <div className="text-center mb-10">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-12 py-8 sm:py-12 lg:py-16">
+        <div className="text-center mb-6 sm:mb-10">
           <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
             Why Choose GlobeCart?
           </h2>

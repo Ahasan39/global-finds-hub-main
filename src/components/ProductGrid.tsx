@@ -3,7 +3,7 @@ import { products, marketplaces } from "@/data/mockData";
 
 const ProductGrid = () => {
   return (
-    <div className="py-4">
+    <div className="py-0">
       {marketplaces.map((mp) => {
         const mpProducts = products.filter((p) => p.source === mp.id);
         return (

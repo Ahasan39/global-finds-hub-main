@@ -1,123 +1,211 @@
 import { useState } from "react";
-import { Search, ShoppingCart, User, Globe, ChevronDown, Menu, X } from "lucide-react";
+import {
+  Search, ShoppingCart, Globe, ChevronDown,
+  Heart, MapPin, Smartphone, Headphones, LayoutGrid, Camera, X, Bell,
+  Building2, Package
+} from "lucide-react";
 import { Link } from "react-router-dom";
 
+const marketplaces = [
+  { id: "1688", name: "1688.com", icon: <Building2 className="w-4 h-4 text-[#f97316]" />, color: "#f97316" },
+  { id: "taobao", name: "Taobao", icon: <ShoppingCart className="w-4 h-4 text-[#f97316]" />, color: "#f97316" },
+  { id: "alibaba", name: "Alibaba", icon: <Globe className="w-4 h-4 text-[#2563eb]" />, color: "#2563eb" },
+  { id: "amazon", name: "Amazon", icon: <Package className="w-4 h-4 text-[#f97316]" />, color: "#f97316" },
+  { id: "pinduoduo", name: "Pinduoduo", icon: <Heart className="w-4 h-4 text-[#ef4444]" />, color: "#ef4444" },
+];
+
 const Header = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [activeMarketplace, setActiveMarketplace] = useState("all");
 
   return (
-    <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-card">
-      {/* Top bar */}
-      <div className="bg-primary text-primary-foreground text-xs py-1.5">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 flex justify-between items-center">
-          <span>🌍 Free shipping on international orders over ৳5,000</span>
-          <div className="hidden sm:flex items-center gap-4">
-            <span>Seller Center</span>
-            <span>Help & Support</span>
+    <>
+      <header className="sticky top-0 z-50 bg-white lg:shadow-none shadow-sm">
+        {/* ── Desktop‑only top utility bar ── */}
+        <div className="hidden lg:block bg-white border-b border-border/40">
+          <div className="max-w-7xl mx-auto px-4 flex justify-between items-center py-2 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
+            <div className="flex items-center gap-6">
+              <a href="#" className="flex items-center gap-1.5 hover:text-primary transition-colors">
+                <Smartphone className="w-3.5 h-3.5" /> Global Cart App
+              </a>
+              <a href="#" className="flex items-center gap-1.5 hover:text-primary transition-colors">
+                <Headphones className="w-3.5 h-3.5" /> Support
+              </a>
+            </div>
+            <div className="flex items-center gap-6">
+              <a href="#" className="flex items-center gap-1.5 hover:text-primary transition-colors">
+                <Heart className="w-3.5 h-3.5" /> Wishlist
+              </a>
+              <div className="flex items-center gap-1.5 cursor-pointer hover:text-primary">
+                Ship to: <span className="flex items-center gap-1 text-foreground ml-1"><MapPin className="w-3 h-3 text-[#10b981]" /> BD</span>
+              </div>
+              <div className="flex items-center gap-1 cursor-pointer hover:text-primary">
+                <span className="text-foreground">EN / BDT</span> <ChevronDown className="w-3 h-3" />
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Main header */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-3">
-        <div className="flex items-center justify-between gap-4">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 shrink-0">
-            <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center">
-              <Globe className="w-5 h-5 text-primary-foreground" />
-            </div>
-            <span className="text-xl font-bold text-foreground tracking-tight">
-              Globe<span className="text-primary">Cart</span>
-            </span>
-          </Link>
-
-          {/* Search bar - desktop */}
-          <div className="hidden md:flex flex-1 max-w-2xl">
-            <div className="relative w-full">
-              <input
-                type="text"
-                placeholder="Search products from global marketplaces..."
-                className="w-full h-11 pl-4 pr-12 rounded-xl border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
-              />
-              <button className="absolute right-1.5 top-1/2 -translate-y-1/2 h-8 w-10 bg-primary rounded-lg flex items-center justify-center hover:bg-primary/90 transition-colors">
-                <Search className="w-4 h-4 text-primary-foreground" />
-              </button>
-            </div>
-          </div>
-
-          {/* Right actions */}
-          <div className="flex items-center gap-2 shrink-0">
-            {/* Language */}
-            <button className="hidden lg:flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors px-2 py-1.5 rounded-lg hover:bg-muted">
-              <Globe className="w-4 h-4" />
-              <span>EN</span>
-              <ChevronDown className="w-3 h-3" />
-            </button>
-
-            {/* Currency */}
-            <button className="hidden lg:flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors px-2 py-1.5 rounded-lg hover:bg-muted">
-              <span>৳ BDT</span>
-              <ChevronDown className="w-3 h-3" />
-            </button>
-
-            {/* Login */}
-            <Link
-              to="/"
-              className="hidden sm:flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors px-3 py-2 rounded-xl hover:bg-secondary"
-            >
-              <User className="w-4 h-4" />
-              <span>Login</span>
-            </Link>
-
-            {/* Cart */}
-            <Link
-              to="/checkout"
-              className="relative flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors px-3 py-2 rounded-xl hover:bg-secondary"
-            >
-              <ShoppingCart className="w-5 h-5" />
-              <span className="absolute -top-0.5 -right-0.5 w-5 h-5 bg-accent text-accent-foreground text-[10px] font-bold rounded-full flex items-center justify-center">
-                3
+        {/* ── Main header row ── */}
+        <div className="max-w-7xl mx-auto px-3 sm:px-4">
+          {/* Mobile layout */}
+          <div className="flex lg:hidden items-center gap-3 h-14">
+            <Link to="/" className="flex items-center gap-2 shrink-0">
+              <div className="w-8 h-8 rounded-full bg-[#007042] flex items-center justify-center shadow-md">
+                <Globe className="w-4.5 h-4.5 text-white w-5 h-5" />
+              </div>
+              <span className="text-[17px] font-black text-[#1e2a3b] tracking-tight leading-none">
+                Global<span className="text-[#007042]">Cart</span>
               </span>
             </Link>
 
-            {/* Mobile menu toggle */}
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 rounded-xl hover:bg-muted transition-colors"
+            <div
+              className="flex-1 flex items-center bg-secondary/30 rounded-xl border border-border/60 px-3 gap-2 h-9 cursor-text"
+              onClick={() => setSearchOpen(true)}
             >
-              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile search */}
-        {mobileOpen && (
-          <div className="md:hidden mt-3 pb-2 animate-fade-in-up">
-            <div className="relative w-full">
-              <input
-                type="text"
-                placeholder="Search products..."
-                className="w-full h-10 pl-4 pr-12 rounded-xl border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
-              />
-              <button className="absolute right-1.5 top-1/2 -translate-y-1/2 h-7 w-9 bg-primary rounded-lg flex items-center justify-center">
-                <Search className="w-4 h-4 text-primary-foreground" />
-              </button>
+              <Search className="w-4 h-4 text-muted-foreground shrink-0" />
+              <span className="text-sm text-muted-foreground/60 flex-1 truncate">Search products...</span>
+              <Camera className="w-4 h-4 text-muted-foreground/50 shrink-0" />
             </div>
-            <div className="flex gap-3 mt-3">
-              <button className="flex items-center gap-1 text-sm text-muted-foreground px-3 py-1.5 rounded-lg bg-muted">
-                <Globe className="w-3.5 h-3.5" /> EN
+
+            <div className="flex items-center gap-1 shrink-0">
+              <button className="relative p-2 rounded-lg hover:bg-secondary transition-colors">
+                <Bell className="w-5 h-5 text-foreground" />
+                <span className="absolute top-1 right-1 w-2 h-2 bg-[#10b981] rounded-full border border-white" />
               </button>
-              <button className="flex items-center gap-1 text-sm text-muted-foreground px-3 py-1.5 rounded-lg bg-muted">
-                ৳ BDT
-              </button>
-              <Link to="/" className="flex items-center gap-1 text-sm text-muted-foreground px-3 py-1.5 rounded-lg bg-muted">
-                <User className="w-3.5 h-3.5" /> Login
+              <Link to="/checkout" className="relative p-2 rounded-lg hover:bg-secondary transition-colors">
+                <ShoppingCart className="w-5 h-5 text-foreground" />
+                <span className="absolute top-1 right-1 w-4 h-4 bg-[#10b981] text-white text-[9px] font-black rounded-full flex items-center justify-center border border-white">0</span>
               </Link>
             </div>
           </div>
-        )}
-      </div>
-    </header>
+
+          {/* Desktop layout */}
+          <div className="hidden lg:flex items-center gap-5 py-3">
+            <Link to="/" className="flex items-center gap-2.5 shrink-0">
+              <div className="w-10 h-10 rounded-full bg-[#007042] flex items-center justify-center shadow-lg">
+                <Globe className="w-6 h-6 text-white" />
+              </div>
+              <span className="text-2xl font-black text-[#1e2a3b] tracking-tighter leading-none">
+                Global Cart
+              </span>
+            </Link>
+
+            <button className="flex items-center gap-2 text-sm font-bold text-foreground bg-[#f3f4f6] px-4 py-2.5 rounded-xl hover:bg-[#e5e7eb] transition-all shrink-0">
+              <LayoutGrid className="w-5 h-5 text-[#007042]" />
+              All Categories <ChevronDown className="w-4 h-4 text-muted-foreground ml-1" />
+            </button>
+
+            <div className="flex-1 max-w-2xl flex items-center bg-white rounded-xl border border-[#e5e7eb] focus-within:border-[#007042] transition-all overflow-hidden">
+              <button className="flex items-center gap-1.5 px-4 py-2.5 text-xs font-bold text-foreground bg-[#f3f4f6] border-r border-[#e5e7eb] hover:bg-[#e5e7eb] transition-colors shrink-0">
+                All <ChevronDown className="w-3 h-3 text-muted-foreground" />
+              </button>
+              <input
+                type="text"
+                placeholder="Search products, brands and more..."
+                className="flex-1 bg-transparent border-none text-sm px-4 h-11 focus:ring-0 placeholder:text-muted-foreground/50"
+              />
+              <div className="flex items-center gap-3 pr-2 shrink-0">
+                <Camera className="w-5 h-5 text-muted-foreground hover:text-[#007042] cursor-pointer transition-colors" />
+                <button className="w-10 h-10 flex items-center justify-center bg-[#007042] text-white rounded-lg hover:brightness-110 transition-all">
+                  <Search className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 shrink-0">
+              <Link to="/checkout" className="relative p-2 hover:bg-secondary/50 rounded-xl transition-all group">
+                <ShoppingCart className="w-6 h-6 text-foreground group-hover:text-[#007042] transition-colors" />
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#10b981] text-white text-[10px] font-black rounded-full flex items-center justify-center border-2 border-white shadow-sm">0</span>
+              </Link>
+              <Link to="/" className="flex items-center gap-2.5 group hover:bg-[#f3f4f6] px-3 py-1.5 rounded-xl transition-all border border-transparent">
+                <div className="w-9 h-9 rounded-full bg-[#f3f4f6] flex items-center justify-center text-muted-foreground group-hover:bg-[#007042] group-hover:text-white transition-all shadow-sm text-sm font-black">
+                  G
+                </div>
+                <div>
+                  <p className="text-[10px] font-bold text-muted-foreground uppercase leading-none mb-0.5">Welcome</p>
+                  <p className="text-xs font-black text-foreground leading-none">Sign In</p>
+                </div>
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Marketplace Navigation Bar (Sticky, Gapless, Single Row) */}
+        <div className="bg-white border-t-[3px] border-[#007042] border-b border-border/60">
+          <div className="max-w-7xl mx-auto px-1.5 sm:px-4 lg:px-12">
+            <div className="flex items-center justify-between lg:justify-start lg:gap-8 py-1.5 lg:py-0">
+              {/* "All" tab */}
+              <button
+                onClick={() => setActiveMarketplace("all")}
+                className={`flex items-center gap-1 lg:gap-2 py-1 lg:py-3.5 px-2 lg:px-0 rounded-full lg:rounded-none transition-all relative ${activeMarketplace === "all"
+                    ? "bg-[#007042]/10 lg:bg-transparent text-[#007042]"
+                    : "text-muted-foreground hover:text-foreground"
+                  }`}
+              >
+                <Globe className={`w-3.5 lg:w-4 h-3.5 lg:h-4 ${activeMarketplace === "all" ? "text-[#007042]" : "text-[#10b981]"}`} />
+                <span className="text-[10px] xs:text-[11px] lg:text-sm font-bold truncate">
+                  <span className="lg:inline hidden">All Marketplace</span>
+                  <span className="lg:hidden inline">All</span>
+                </span>
+                {activeMarketplace === "all" && <div className="hidden lg:block absolute bottom-0 left-0 w-full h-[3px] bg-[#007042] rounded-t-full" />}
+              </button>
+
+              {marketplaces.map((mp) => (
+                <button
+                  key={mp.id}
+                  onClick={() => setActiveMarketplace(mp.id)}
+                  className={`flex items-center gap-1 lg:gap-2 py-1 lg:py-3.5 px-2 lg:px-0 rounded-full lg:rounded-none transition-all relative ${activeMarketplace === mp.id
+                      ? "bg-[#007042]/10 lg:bg-transparent text-[#007042]"
+                      : "text-muted-foreground hover:text-foreground"
+                    }`}
+                >
+                  <span className="shrink-0 scale-90 lg:scale-100">{mp.icon}</span>
+                  <span className="text-[10px] xs:text-[11px] lg:text-sm font-bold truncate">
+                    {mp.name.replace(".com", "")}
+                  </span>
+                  {activeMarketplace === mp.id && <div className="hidden lg:block absolute bottom-0 left-0 w-full h-[3px] bg-[#007042] rounded-t-full" />}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </header>
+
+
+
+      {/* ── Mobile full-screen search overlay ── */}
+      {searchOpen && (
+        <div className="fixed inset-0 z-[60] bg-white flex flex-col lg:hidden" onClick={() => setSearchOpen(false)}>
+          <div className="flex items-center gap-3 px-4 pt-4 pb-3 border-b border-border" onClick={(e) => e.stopPropagation()}>
+            <button onClick={() => setSearchOpen(false)} className="p-2 rounded-full hover:bg-secondary shrink-0">
+              <X className="w-5 h-5" />
+            </button>
+            <div className="flex-1 flex items-center bg-secondary/30 rounded-xl border border-primary ring-2 ring-primary/10 px-3 gap-2 h-10">
+              <Search className="w-4 h-4 text-primary shrink-0" />
+              <input
+                autoFocus
+                type="text"
+                placeholder="Search products, brands..."
+                className="flex-1 bg-transparent border-none text-sm focus:ring-0"
+              />
+              <Camera className="w-4 h-4 text-muted-foreground shrink-0" />
+            </div>
+          </div>
+          {/* Quick searches */}
+          <div className="px-4 pt-4">
+            <p className="text-[11px] font-black text-muted-foreground uppercase tracking-widest mb-3">Trending Searches</p>
+            <div className="flex flex-wrap gap-2">
+              {["Women Dress", "Electronics", "Sneakers", "Phone Cases", "Watches", "Bags", "Toys"].map((q) => (
+                <button key={q} className="px-3 py-1.5 bg-secondary/50 rounded-full text-xs font-bold text-foreground hover:bg-primary hover:text-white transition-all">
+                  {q}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
