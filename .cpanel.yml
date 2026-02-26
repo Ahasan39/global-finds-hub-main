@@ -1,6 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/alibab/public_html/alibaba.webleez.com
+    - export DEPLOYPATH=/home/alibab/public_html
     - /bin/cp -R dist/* $DEPLOYPATH
+
 
