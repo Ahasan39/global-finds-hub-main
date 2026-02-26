@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 150 10% 97%;
+    --foreground: 200 25% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 200 25% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 200 25% 10%;
+
+    --primary: 160 84% 24%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 155 20% 92%;
+    --secondary-foreground: 160 84% 24%;
+
+    --muted: 150 10% 94%;
+    --muted-foreground: 200 10% 45%;
+
+    --accent: 32 95% 52%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 150 10% 90%;
+    --input: 150 10% 88%;
+    --ring: 160 84% 24%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens */
+    --hero-gradient: linear-gradient(135deg, hsl(160 84% 24%) 0%, hsl(170 60% 30%) 50%, hsl(180 50% 22%) 100%);
+    --card-shadow: 0 1px 3px 0 hsl(200 25% 10% / 0.06), 0 1px 2px -1px hsl(200 25% 10% / 0.06);
+    --card-shadow-hover: 0 10px 25px -5px hsl(200 25% 10% / 0.1), 0 8px 10px -6px hsl(200 25% 10% / 0.08);
+    --badge-api: 162 72% 45%;
+    --footer-bg: 200 25% 10%;
+    --footer-foreground: 150 10% 85%;
+    --star-color: 45 93% 47%;
+    --success: 160 84% 24%;
+    --price-original: 200 10% 55%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 200 25% 8%;
+    --foreground: 150 10% 95%;
+    --card: 200 20% 12%;
+    --card-foreground: 150 10% 95%;
+    --popover: 200 20% 12%;
+    --popover-foreground: 150 10% 95%;
+    --primary: 160 70% 40%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 200 15% 18%;
+    --secondary-foreground: 150 10% 90%;
+    --muted: 200 15% 18%;
+    --muted-foreground: 200 10% 60%;
+    --accent: 32 95% 52%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 200 15% 20%;
+    --input: 200 15% 20%;
+    --ring: 160 70% 40%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .hero-gradient {
+    background: var(--hero-gradient);
+  }
+  .footer-bg {
+    background-color: hsl(var(--footer-bg));
+    color: hsl(var(--footer-foreground));
+  }
+}
