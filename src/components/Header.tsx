@@ -138,13 +138,13 @@ const Header = () => {
               {/* "All" tab */}
               <button
                 onClick={() => setActiveMarketplace("all")}
-                className={`flex flex-col lg:flex-row items-center justify-center gap-0.5 lg:gap-2 py-1 lg:py-3.5 px-0.5 lg:px-0 transition-all relative ${activeMarketplace === "all"
+                className={`flex flex-col lg:flex-row items-center justify-center gap-0.5 lg:gap-2 py-1 lg:py-3.5 px-0.5 lg:px-0 transition-all relative w-full min-w-0 ${activeMarketplace === "all"
                   ? "bg-[#007042]/10 lg:bg-transparent text-[#007042]"
                   : "text-muted-foreground hover:text-foreground"
                   }`}
               >
-                <Globe className={`w-3.5 lg:w-4 h-3.5 lg:h-4 ${activeMarketplace === "all" ? "text-[#007042]" : "text-[#10b981]"}`} />
-                <span className="text-[9px] xs:text-[10px] lg:text-sm font-bold truncate text-center">
+                <Globe className={`w-3.5 lg:w-4 h-3.5 lg:h-4 shrink-0 ${activeMarketplace === "all" ? "text-[#007042]" : "text-[#10b981]"}`} />
+                <span className="text-[9px] xs:text-[10px] lg:text-sm font-bold truncate text-center w-full">
                   <span className="lg:inline hidden">All Marketplace</span>
                   <span className="lg:hidden inline">All</span>
                 </span>
@@ -155,13 +155,13 @@ const Header = () => {
                 <button
                   key={mp.id}
                   onClick={() => setActiveMarketplace(mp.id)}
-                  className={`flex flex-col lg:flex-row items-center justify-center gap-0.5 lg:gap-2 py-1 lg:py-3.5 px-0.5 lg:px-0 transition-all relative ${activeMarketplace === mp.id
+                  className={`flex flex-col lg:flex-row items-center justify-center gap-0.5 lg:gap-2 py-1 lg:py-3.5 px-0.5 lg:px-0 transition-all relative w-full min-w-0 ${activeMarketplace === mp.id
                     ? "bg-[#007042]/10 lg:bg-transparent text-[#007042]"
                     : "text-muted-foreground hover:text-foreground"
                     }`}
                 >
                   <span className="shrink-0 scale-[0.85] lg:scale-100">{mp.icon}</span>
-                  <span className="text-[9px] xs:text-[10px] lg:text-sm font-bold truncate text-center">
+                  <span className="text-[9px] xs:text-[10px] lg:text-sm font-bold truncate text-center w-full">
                     {mp.name.replace(".com", "")}
                   </span>
                   {activeMarketplace === mp.id && <div className="hidden lg:block absolute bottom-0 left-0 w-full h-[3px] bg-[#007042] rounded-t-full" />}
