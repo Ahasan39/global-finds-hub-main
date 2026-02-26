@@ -2,9 +2,16 @@ import { useState } from "react";
 import {
   Search, ShoppingCart, Globe, ChevronDown,
   Heart, MapPin, Smartphone, Headphones, LayoutGrid, Camera, X, Bell,
-  Building2, Package
+  Building2, Package, Menu, User, HelpCircle, LogIn, Home
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 const marketplaces = [
   { id: "1688", name: "1688.com", icon: <Building2 className="w-4 h-4 text-[#f97316]" />, color: "#f97316" },
@@ -20,7 +27,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-white lg:shadow-none shadow-sm">
+      <header className="sticky top-0 z-50 bg-white lg:shadow-none shadow-sm w-full overflow-hidden">
         {/* ── Desktop‑only top utility bar ── */}
         <div className="hidden lg:block bg-white border-b border-border/40">
           <div className="max-w-7xl mx-auto px-4 flex justify-between items-center py-2 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
@@ -47,33 +54,84 @@ const Header = () => {
         </div>
 
         {/* ── Main header row ── */}
-        <div className="max-w-7xl mx-auto px-3 sm:px-4">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4">
           {/* Mobile layout */}
-          <div className="flex lg:hidden items-center gap-3 h-14">
-            <Link to="/" className="flex items-center gap-2 shrink-0">
-              <div className="w-8 h-8 rounded-full bg-[#007042] flex items-center justify-center shadow-md">
-                <Globe className="w-4.5 h-4.5 text-white w-5 h-5" />
+          <div className="flex lg:hidden items-center gap-2 h-14">
+            <Sheet>
+              <SheetTrigger asChild>
+                <button className="p-1.5 rounded-lg hover:bg-secondary shrink-0">
+                  <Menu className="w-6 h-6 text-foreground" />
+                </button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-[280px] p-0 border-none">
+                <SheetHeader className="p-6 bg-[#007042] text-white text-left">
+                  <SheetTitle className="text-white flex items-center gap-2 font-black italic">
+                    <Globe className="w-6 h-6" /> GLOBAL CART
+                  </SheetTitle>
+                  <p className="text-white/80 text-xs font-medium mt-1 uppercase tracking-widest">Shop the entire world</p>
+                </SheetHeader>
+                <div className="py-4">
+                  <div className="px-6 py-4 space-y-6">
+                    <div className="space-y-4">
+                      <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest leading-none">Main Menu</p>
+                      {[
+                        { icon: Home, label: "Home", href: "/" },
+                        { icon: Search, label: "Browse Products", href: "/" },
+                        { icon: LayoutGrid, label: "All Categories", href: "/" },
+                        { icon: Heart, label: "My Wishlist", href: "/" },
+                      ].map((item, idx) => (
+                        <Link key={idx} to={item.href} className="flex items-center gap-4 text-sm font-bold text-foreground hover:text-[#007042] transition-colors group">
+                          <item.icon className="w-5 h-5 text-muted-foreground group-hover:text-[#007042]" />
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+
+                    <div className="h-px bg-border/60" />
+
+                    <div className="space-y-4">
+                      <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest leading-none">Account & Support</p>
+                      {[
+                        { icon: User, label: "My Account", href: "/" },
+                        { icon: Headphones, label: "Customer Support", href: "/" },
+                        { icon: HelpCircle, label: "How it Works", href: "/" },
+                        { icon: LogIn, label: "Sign In / Join", href: "/" },
+                      ].map((item, idx) => (
+                        <Link key={idx} to={item.href} className="flex items-center gap-4 text-sm font-bold text-foreground hover:text-[#007042] transition-colors group">
+                          <item.icon className="w-5 h-5 text-muted-foreground group-hover:text-[#007042]" />
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
+
+            <Link to="/" className="flex items-center gap-1.5 shrink-0">
+              <div className="w-7 h-7 rounded-full bg-[#007042] flex items-center justify-center shadow-sm">
+                <Globe className="w-4 h-4 text-white" />
               </div>
-              <span className="text-[17px] font-black text-[#1e2a3b] tracking-tight leading-none">
+              <span className="text-[15px] xs:text-[17px] font-black text-[#1e2a3b] tracking-tighter leading-none xs:block hidden">
                 Global<span className="text-[#007042]">Cart</span>
               </span>
             </Link>
 
             <div
-              className="flex-1 flex items-center bg-secondary/30 rounded-xl border border-border/60 px-3 gap-2 h-9 cursor-text"
+              className="flex-1 min-w-0 flex items-center bg-secondary/30 rounded-lg border border-border/40 px-2 gap-1.5 h-9 cursor-text overflow-hidden"
               onClick={() => setSearchOpen(true)}
             >
-              <Search className="w-4 h-4 text-muted-foreground shrink-0" />
-              <span className="text-sm text-muted-foreground/60 flex-1 truncate">Search products...</span>
-              <Camera className="w-4 h-4 text-muted-foreground/50 shrink-0" />
+              <Search className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
+              <span className="text-[11px] sm:text-xs text-muted-foreground/60 flex-1 truncate font-medium">Search...</span>
+              <Camera className="w-3.5 h-3.5 text-muted-foreground/30 shrink-0" />
             </div>
 
-            <div className="flex items-center gap-1 shrink-0">
-              <button className="relative p-2 rounded-lg hover:bg-secondary transition-colors">
+            <div className="flex items-center gap-0.5 shrink-0">
+              <button className="relative p-1.5 rounded-lg hover:bg-secondary transition-colors">
                 <Bell className="w-5 h-5 text-foreground" />
-                <span className="absolute top-1 right-1 w-2 h-2 bg-[#10b981] rounded-full border border-white" />
+                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#10b981] rounded-full border border-white" />
               </button>
-              <Link to="/checkout" className="relative p-2 rounded-lg hover:bg-secondary transition-colors">
+              <Link to="/checkout" className="relative p-1.5 rounded-lg hover:bg-secondary transition-colors">
                 <ShoppingCart className="w-5 h-5 text-foreground" />
                 <span className="absolute top-1 right-1 w-4 h-4 bg-[#10b981] text-white text-[9px] font-black rounded-full flex items-center justify-center border border-white">0</span>
               </Link>
@@ -138,13 +196,13 @@ const Header = () => {
               {/* "All" tab */}
               <button
                 onClick={() => setActiveMarketplace("all")}
-                className={`flex flex-col lg:flex-row items-center justify-center gap-0.5 lg:gap-2 py-1 lg:py-3.5 px-0.5 lg:px-0 transition-all relative w-full min-w-0 ${activeMarketplace === "all"
+                className={`flex flex-col lg:flex-row items-center justify-center gap-0.5 lg:gap-1.5 py-1.5 lg:py-3.5 px-0.5 transition-all relative w-full min-w-0 ${activeMarketplace === "all"
                   ? "bg-[#007042]/10 lg:bg-transparent text-[#007042]"
                   : "text-muted-foreground hover:text-foreground"
                   }`}
               >
-                <Globe className={`w-3.5 lg:w-4 h-3.5 lg:h-4 shrink-0 ${activeMarketplace === "all" ? "text-[#007042]" : "text-[#10b981]"}`} />
-                <span className="text-[9px] xs:text-[10px] lg:text-sm font-bold truncate text-center w-full">
+                <Globe className={`w-3.5 lg:w-4 h-3.5 lg:h-4 shrink-0 transition-transform ${activeMarketplace === "all" ? "text-[#007042] scale-110" : "text-[#10b981]"}`} />
+                <span className="text-[8.5px] xs:text-[10px] lg:text-sm font-bold truncate text-center w-full leading-none">
                   <span className="lg:inline hidden">All Marketplace</span>
                   <span className="lg:hidden inline">All</span>
                 </span>
@@ -155,13 +213,13 @@ const Header = () => {
                 <button
                   key={mp.id}
                   onClick={() => setActiveMarketplace(mp.id)}
-                  className={`flex flex-col lg:flex-row items-center justify-center gap-0.5 lg:gap-2 py-1 lg:py-3.5 px-0.5 lg:px-0 transition-all relative w-full min-w-0 ${activeMarketplace === mp.id
+                  className={`flex flex-col lg:flex-row items-center justify-center gap-0.5 lg:gap-1.5 py-1.5 lg:py-3.5 px-0.5 transition-all relative w-full min-w-0 ${activeMarketplace === mp.id
                     ? "bg-[#007042]/10 lg:bg-transparent text-[#007042]"
                     : "text-muted-foreground hover:text-foreground"
                     }`}
                 >
-                  <span className="shrink-0 scale-[0.85] lg:scale-100">{mp.icon}</span>
-                  <span className="text-[9px] xs:text-[10px] lg:text-sm font-bold truncate text-center w-full">
+                  <span className={`shrink-0 transition-transform ${activeMarketplace === mp.id ? "scale-105" : "scale-[0.85] lg:scale-100 opacity-70"}`}>{mp.icon}</span>
+                  <span className="text-[8.5px] xs:text-[10px] lg:text-sm font-bold truncate text-center w-full leading-none">
                     {mp.name.replace(".com", "")}
                   </span>
                   {activeMarketplace === mp.id && <div className="hidden lg:block absolute bottom-0 left-0 w-full h-[3px] bg-[#007042] rounded-t-full" />}
