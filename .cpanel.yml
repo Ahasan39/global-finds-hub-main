@@ -1,0 +1,8 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/YOUR_CPANEL_USERNAME/public_html/YOUR_SUBDOMAIN_FOLDER
+    # Optional: Build commands if Node.js is available on your cPanel
+    # - /usr/local/bin/npm install
+    # - /usr/local/bin/npm run build
+    - /bin/cp -R dist/* $DEPLOYPATH
