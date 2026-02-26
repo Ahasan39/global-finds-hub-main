@@ -133,18 +133,18 @@ const Header = () => {
 
         {/* Marketplace Navigation Bar (Sticky, Gapless, Single Row) */}
         <div className="bg-white border-t-[3px] border-[#007042] border-b border-border/60">
-          <div className="max-w-7xl mx-auto px-1.5 sm:px-4 lg:px-12">
-            <div className="flex items-center justify-between lg:justify-start lg:gap-8 py-1.5 lg:py-0">
+          <div className="max-w-7xl mx-auto px-1 sm:px-4 lg:px-12">
+            <div className="grid grid-cols-6 lg:flex items-center lg:gap-8 py-1.5 lg:py-0">
               {/* "All" tab */}
               <button
                 onClick={() => setActiveMarketplace("all")}
-                className={`flex items-center gap-1 lg:gap-2 py-1 lg:py-3.5 px-2 lg:px-0 rounded-full lg:rounded-none transition-all relative ${activeMarketplace === "all"
-                    ? "bg-[#007042]/10 lg:bg-transparent text-[#007042]"
-                    : "text-muted-foreground hover:text-foreground"
+                className={`flex flex-col lg:flex-row items-center justify-center gap-0.5 lg:gap-2 py-1 lg:py-3.5 px-0.5 lg:px-0 transition-all relative ${activeMarketplace === "all"
+                  ? "bg-[#007042]/10 lg:bg-transparent text-[#007042]"
+                  : "text-muted-foreground hover:text-foreground"
                   }`}
               >
                 <Globe className={`w-3.5 lg:w-4 h-3.5 lg:h-4 ${activeMarketplace === "all" ? "text-[#007042]" : "text-[#10b981]"}`} />
-                <span className="text-[10px] xs:text-[11px] lg:text-sm font-bold truncate">
+                <span className="text-[9px] xs:text-[10px] lg:text-sm font-bold truncate text-center">
                   <span className="lg:inline hidden">All Marketplace</span>
                   <span className="lg:hidden inline">All</span>
                 </span>
@@ -155,13 +155,13 @@ const Header = () => {
                 <button
                   key={mp.id}
                   onClick={() => setActiveMarketplace(mp.id)}
-                  className={`flex items-center gap-1 lg:gap-2 py-1 lg:py-3.5 px-2 lg:px-0 rounded-full lg:rounded-none transition-all relative ${activeMarketplace === mp.id
-                      ? "bg-[#007042]/10 lg:bg-transparent text-[#007042]"
-                      : "text-muted-foreground hover:text-foreground"
+                  className={`flex flex-col lg:flex-row items-center justify-center gap-0.5 lg:gap-2 py-1 lg:py-3.5 px-0.5 lg:px-0 transition-all relative ${activeMarketplace === mp.id
+                    ? "bg-[#007042]/10 lg:bg-transparent text-[#007042]"
+                    : "text-muted-foreground hover:text-foreground"
                     }`}
                 >
-                  <span className="shrink-0 scale-90 lg:scale-100">{mp.icon}</span>
-                  <span className="text-[10px] xs:text-[11px] lg:text-sm font-bold truncate">
+                  <span className="shrink-0 scale-[0.85] lg:scale-100">{mp.icon}</span>
+                  <span className="text-[9px] xs:text-[10px] lg:text-sm font-bold truncate text-center">
                     {mp.name.replace(".com", "")}
                   </span>
                   {activeMarketplace === mp.id && <div className="hidden lg:block absolute bottom-0 left-0 w-full h-[3px] bg-[#007042] rounded-t-full" />}
